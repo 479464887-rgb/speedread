@@ -1,0 +1,61 @@
+/* SpeedRead - Content Styles */
+#speedread-overlay {
+  position: fixed; inset: 0; z-index: 2147483647;
+  display: flex; align-items: center; justify-content: center;
+  animation: sr-fade-in 0.2s ease;
+}
+.sr-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.85);
+}
+.sr-container {
+  position: relative; z-index: 1;
+  text-align: center; width: 90vw; max-width: 700px;
+}
+.sr-word {
+  color: #f0f6fc; font-weight: 700;
+  font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  min-height: 80px; display: flex; align-items: center; justify-content: center;
+  letter-spacing: 2px; transition: transform 0.08s;
+  text-shadow: 0 0 40px rgba(88,166,255,0.3);
+}
+/* ORP marker - optimal recognition point */
+.sr-word::first-letter { color: #f85149; }
+.sr-controls {
+  margin-top: 32px;
+  background: rgba(22,27,34,0.95);
+  border: 1px solid #30363d; border-radius: 16px;
+  padding: 20px 24px;
+}
+.sr-progress-bar {
+  height: 3px; background: #21262d; border-radius: 2px;
+  margin-bottom: 16px; overflow: hidden;
+}
+.sr-progress-fill {
+  height: 100%; background: linear-gradient(90deg,#58a6ff,#3fb950);
+  border-radius: 2px; width: 0%; transition: width 0.2s;
+}
+.sr-info {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: #8b949e; margin-bottom: 12px;
+}
+.sr-buttons {
+  display: flex; gap: 8px; justify-content: center;
+}
+.sr-btn {
+  padding: 8px 16px; font-size: 16px;
+  border: 1px solid #30363d; border-radius: 10px;
+  background: #21262d; color: #c9d1d9; cursor: pointer;
+  transition: all 0.15s;
+}
+.sr-btn:hover { background: #30363d; border-color: #58a6ff; }
+.sr-btn-play {
+  background: #238636; border-color: #238636; color: #fff;
+  min-width: 60px; font-size: 14px;
+}
+.sr-btn-play:hover { background: #2ea043; }
+
+@keyframes sr-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

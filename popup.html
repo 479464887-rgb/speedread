@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SpeedRead</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:#c9d1d9;background:#0d1117;width:280px;padding:16px;text-align:center}
+h1{font-size:16px;color:#58a6ff;margin-bottom:4px}
+.sub{font-size:11px;color:#8b949e;margin-bottom:16px}
+.wpm-display{font-size:48px;font-weight:700;color:#f0f6fc;margin-bottom:4px}
+.wpm-label{font-size:12px;color:#8b949e;margin-bottom:12px}
+.slider{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:#21262d;outline:none;margin-bottom:16px;cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#58a6ff;cursor:pointer;border:2px solid #0d1117}
+.btn{display:block;width:100%;padding:10px;font-size:14px;font-weight:600;border:1px solid #30363d;border-radius:8px;cursor:pointer;background:#238636;color:#fff;margin-bottom:8px;transition:background 0.15s}
+.btn:hover{background:#2ea043}
+.btn-secondary{background:#21262d;color:#c9d1d9}
+.btn-secondary:hover{background:#30363d}
+.presets{display:flex;gap:6px;margin-bottom:12px}
+.preset{flex:1;padding:6px;font-size:11px;border:1px solid #30363d;border-radius:6px;background:#161b22;color:#c9d1d9;cursor:pointer;transition:all 0.1s}
+.preset:hover{border-color:#58a6ff;background:#1a2230}
+.footer{padding-top:8px;border-top:1px solid #21262d;margin-top:8px}
+.footer a{color:#8b949e;text-decoration:none;font-size:11px}
+</style>
+</head>
+<body>
+<h1>⚡ SpeedRead</h1>
+<p class="sub">选中文字，开始速读</p>
+
+<div class="wpm-display" id="wpm-val">400</div>
+<div class="wpm-label">词/分钟 (WPM)</div>
+
+<div class="presets">
+  <button class="preset" data-wpm="200">200</button>
+  <button class="preset" data-wpm="350">350</button>
+  <button class="preset" data-wpm="500">500</button>
+  <button class="preset" data-wpm="700">700</button>
+</div>
+
+<input type="range" class="slider" id="wpm-slider" min="100" max="1000" value="400" step="10">
+
+<button class="btn" id="btn-start">▶ 开始速读</button>
+<button class="btn btn-secondary" id="btn-settings">⚙️ 设置</button>
+
+<div class="footer">
+  <span style="font-size:10px;color:#8b949e">快捷键: Alt+R</span>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
