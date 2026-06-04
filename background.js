@@ -1,3 +1,8 @@
+// ExtPay - Payment integration
+importScripts('ExtPay.js');
+const extpay = ExtPay('speedread');
+extpay.startBackground();
+
 // SpeedRead - Background Service Worker
 const DEFAULTS = {
   wpm: 400,
@@ -26,6 +31,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     case 'GET_SETTINGS':
       chrome.storage.sync.get('settings').then(sendResponse);
       return true;
+  case 'GET_PAID_STATUS':
+    extpay.getUser().then(sendResponse);
+    return true;
+  case 'OPEN_PAYMENT':
+    extpay.openPaymentPage();
+    sendResponse({ success: true });
+    return false;
+  case 'OPEN_LOGIN':
+    extpay.openLoginPage();
+    sendResponse({ success: true });
+    return false;
+
     case 'SAVE_SETTINGS':
       chrome.storage.sync.set({ settings: request.settings }).then(() => sendResponse({ success: true }));
       return true;

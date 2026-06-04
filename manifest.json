@@ -4,18 +4,31 @@
   "version": "1.0.0",
   "description": "RSVP极速阅读 — 选中文字一键速读，200-1000词/分钟，效率翻倍",
   "homepage_url": "https://479464887-rgb.github.io/speedread/",
-  "author": {"email": "tulv202900@163.com"},
-  "permissions": ["storage", "activeTab", "commands"],
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
+  "author": {
+    "email": "tulv202900@163.com"
   },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["content.js"],
-    "css": ["content.css"],
-    "run_at": "document_end"
-  }],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "commands"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -36,7 +49,10 @@
   },
   "commands": {
     "start-speedread": {
-      "suggested_key": { "default": "Alt+R", "mac": "Alt+R" },
+      "suggested_key": {
+        "default": "Alt+R",
+        "mac": "Alt+R"
+      },
       "description": "开始速读选中文字"
     }
   }
