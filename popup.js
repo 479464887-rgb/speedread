@@ -1,42 +1,61 @@
-// SpeedRead - Popup
-document.addEventListener('DOMContentLoaded', async () => {
-  // Load settings
-  const { settings } = await chrome.runtime.sendMessage({ type: 'GET_SETTINGS' });
-  const wpm = settings?.wpm || 400;
+let words = [], index = 0, playing = false, interval = null;
+const display = document.getElementById('word-display');
+const playBtn = document.getElementById('play-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const resetBtn = document.getElementById('reset-btn');
+const speedInput = document.getElementById('speed');
+const wpmLabel = document.getElementById('wpm-label');
+const textInput = document.getElementById('text-input');
 
-  const slider = document.getElementById('wpm-slider');
-  const display = document.getElementById('wpm-val');
-  slider.value = wpm;
-  display.textContent = wpm;
-
-  slider.addEventListener('input', () => {
-    display.textContent = slider.value;
-  });
-
-  // Presets
-  document.querySelectorAll('.preset').forEach(p => {
-    p.addEventListener('click', () => {
-      slider.value = p.dataset.wpm;
-      display.textContent = p.dataset.wpm;
-    });
-  });
-
-  // Start speed read
-  document.getElementById('btn-start').addEventListener('click', async () => {
-    const currentWpm = parseInt(slider.value);
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    // Update WPM in content script
-    if (tab?.id) {
-      await chrome.tabs.sendMessage(tab.id, { type: 'SET_WPM', wpm: currentWpm });
-      await chrome.tabs.sendMessage(tab.id, { type: 'SPEEDREAD_SELECTION' });
-    }
-    window.close();
-  });
-
-  // Settings
-  document.getElementById('btn-settings').addEventListener('click', (e) => {
-    e.preventDefault();
-    chrome.runtime.openOptionsPage();
-  });
+speedInput.addEventListener('input', () => {
+  wpmLabel.textContent = speedInput.value + ' WPM';
+  if (playing) { clearInterval(interval); startInterval(); }
 });
+
+playBtn.addEventListener('click', () => {
+  if (!playing) {
+    words = textInput.value.split(/\s+/).filter(w => w.length > 0);
+    if (words.length === 0) return;
+    if (index >= words.length) index = 0;
+    playing = true;
+    playBtn.textContent = '⏸ Pause';
+    showWord();
+    startInterval();
+  } else {
+    playing = false;
+    playBtn.textContent = '▶ Play';
+    clearInterval(interval);
+  }
+});
+
+pauseBtn.addEventListener('click', () => {
+  playing = false;
+  playBtn.textContent = '▶ Play';
+  clearInterval(interval);
+});
+
+resetBtn.addEventListener('click', () => {
+  playing = false;
+  clearInterval(interval);
+  index = 0;
+  playBtn.textContent = '▶ Play';
+  display.innerHTML = '<span class="word">Ready</span>';
+});
+
+function startInterval() {
+  clearInterval(interval);
+  interval = setInterval(() => {
+    if (index >= words.length) { playing = false; clearInterval(interval); playBtn.textContent = '▶ Play'; return; }
+    showWord();
+    index++;
+  }, 60000 / parseInt(speedInput.value));
+}
+
+function showWord() {
+  const word = words[index];
+  const pivot = Math.floor(word.length / 2);
+  const prefix = word.substring(0, pivot);
+  const focus = word.charAt(pivot);
+  const suffix = word.substring(pivot + 1);
+  display.innerHTML = `<span class="word">${prefix}<span class="focus-letter">${focus}</span>${suffix}</span>`;
+}
