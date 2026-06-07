@@ -1,4 +1,12 @@
 // SpeedRead - Content Script
+
+// Safe HTML escaping helper
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 let overlay = null;
 let isPlaying = false;
 let words = [];
@@ -35,7 +43,7 @@ async function startSpeedRead(text) {
   try {
     const resp = await chrome.runtime.sendMessage({ type: 'GET_SETTINGS' });
     settings = resp.settings || {};
-  } catch (e) {}
+  } catch (e) { console.error('SpeedRead: failed to get settings:', e); }
 
   wpm = settings.wpm || 400;
   const fontSize = settings.fontSize || 42;
@@ -73,7 +81,7 @@ async function startSpeedRead(text) {
   overlay.innerHTML = `
     <div class="sr-backdrop"></div>
     <div class="sr-container">
-      <div class="sr-word" style="font-size:${fontSize}px">${words[0]}</div>
+      <div class="sr-word" style="font-size:${fontSize}px">${escapeHtml(words[0])}</div>
       <div class="sr-controls">
         <div class="sr-progress-bar"><div class="sr-progress-fill"></div></div>
         <div class="sr-info">

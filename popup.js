@@ -51,11 +51,17 @@ function startInterval() {
   }, 60000 / parseInt(speedInput.value));
 }
 
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 function showWord() {
   const word = words[index];
   const pivot = Math.floor(word.length / 2);
   const prefix = word.substring(0, pivot);
   const focus = word.charAt(pivot);
   const suffix = word.substring(pivot + 1);
-  display.innerHTML = `<span class="word">${prefix}<span class="focus-letter">${focus}</span>${suffix}</span>`;
+  display.innerHTML = `<span class="word">${escapeHtml(prefix)}<span class="focus-letter">${escapeHtml(focus)}</span>${escapeHtml(suffix)}</span>`;
 }
