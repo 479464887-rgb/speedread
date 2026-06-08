@@ -1,5 +1,6 @@
 {
   "manifest_version": 3,
+  "minimum_chrome_version": "88",
   "name": "SpeedRead",
   "version": "1.0.0",
   "description": "RSVP极速阅读 — 选中文字一键速读，200-1000词/分钟，效率翻倍",
