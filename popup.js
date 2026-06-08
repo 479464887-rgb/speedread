@@ -1,3 +1,30 @@
+// ==================== ExtPay Integration ====================
+let extpay;
+try {
+  extpay = ExtPay('speedread');
+  
+  extpay.getUser().then(user => {
+    if (user && user.paid) {
+      document.body.classList.add('pro-user');
+      const badge = document.querySelector('.pro-badge');
+      if (badge) badge.style.display = 'inline-block';
+    } else {
+      document.body.classList.add('free-user');
+    }
+  }).catch(e => console.error('ExtPay: getUser failed', e));
+  
+  window.openUpgrade = () => {
+    try { extpay.openPaymentPage(); }
+    catch(e) { console.error('ExtPay: payment failed', e); }
+  };
+  window.openLogin = () => {
+    try { extpay.openLoginPage(); }
+    catch(e) { console.error('ExtPay: login failed', e); }
+  };
+} catch(e) {
+  console.error('speedread: ExtPay init failed', e);
+}
+
 let words = [], index = 0, playing = false, interval = null;
 const display = document.getElementById('word-display');
 const playBtn = document.getElementById('play-btn');
