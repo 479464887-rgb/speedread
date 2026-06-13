@@ -34,7 +34,7 @@ async function startSpeedRead(text) {
   // Use selected text or passed text
   const selectedText = text || window.getSelection()?.toString()?.trim();
   if (!selectedText || selectedText.length < 10) {
-    alert('Please select text to speed read (at least 10 characters)');
+    alert('请先选中要速读的文字（至少10个字符）');
     return;
   }
 

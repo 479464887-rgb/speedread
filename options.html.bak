@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SpeedRead · Settings</title>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SpeedRead · 设置</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;color:#c9d1d9;background:#0d1117;max-width:500px;margin:40px auto;padding:0 20px}
@@ -17,10 +17,10 @@ h1{font-size:22px;color:#58a6ff;margin-bottom:24px}
 #status{margin-left:12px;font-size:13px;color:#3fb950;display:none}
 </style></head>
 <body>
-<h1>⚡ SpeedRead Settings</h1>
-<div class="card"><h2>Default Parameters</h2>
-<div class="field"><label>Default Speed (WPM)</label><div class="hint">100=Slow, 400=Normal, 700+=Extreme</div><input type="number" id="wpm" min="100" max="1000" value="400"></div>
-<div class="field"><label>Font Size (px)</label><input type="number" id="font-size" min="24" max="100" value="42"></div></div>
-<div class="card"><button class="btn" id="save">SaveSettings</button><span id="status"></span></div>
+<h1>⚡ SpeedRead 设置</h1>
+<div class="card"><h2>默认参数</h2>
+<div class="field"><label>默认速度 (WPM)</label><div class="hint">100=慢速, 400=正常, 700+=极速</div><input type="number" id="wpm" min="100" max="1000" value="400"></div>
+<div class="field"><label>字体大小 (px)</label><input type="number" id="font-size" min="24" max="100" value="42"></div></div>
+<div class="card"><button class="btn" id="save">保存设置</button><span id="status"></span></div>
 <script src="options.js"></script>
 </body></html>
